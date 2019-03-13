@@ -1,5 +1,23 @@
 server:
-  port: 8081
-  
+  port: 8081 #8181
 spring:
-  profiles: dev  
+  application:
+    name: provider
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: http://localhost:8888
+      label: master
+      profile: dev
+foo:
+  db: xs
+      
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:876122/eureka  #注册 中心已经开启认证
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    
