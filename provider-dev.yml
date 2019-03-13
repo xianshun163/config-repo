@@ -1,24 +1,22 @@
 server:
-  port: 8081 #8181
+  port: 8888
 spring:
-  application:
-    name: provider
-  profiles:
-    active: dev
   cloud:
     config:
-      uri: http://localhost:8888
+      server:
+        git:
+          uri: https://github.com/xianshun163/config-repo.git #git@github.com:xianshun163/config-repo.git  #
+          search-paths: config-repo
+      username: xianshun163@163.com
+      password: xianshun111
       label: master
-      profile: dev
-      
-foo:
-  db: xs
-      
+  application:
+    name: config-server
+    
 eureka:
   client:
     serviceUrl:
-     defaultZone: http://localhost:876122/eureka  #×¢²á ÖĞĞÄÒÑ¾­¿ªÆôÈÏÖ¤
+     defaultZone: http://localhost:8761/eureka  #æ³¨å†Œ ä¸­å¿ƒå·²ç»å¼€å¯è®¤è¯
   instance:
     prefer-ip-address: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
-    
